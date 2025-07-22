@@ -7,9 +7,5 @@
   "trailingComma": "none",
   "semi": false,
   "endOfLine": "lf",
-  "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "importOrder": ["^\\w", "^@(?!hn/).*(.*)", "^@hn/(.*)", "^\\.", "^\\./", "^\\.\\./"],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true,
-  "importOrderGroupNamespaceSpecifiers": true
+  "plugins": ["prettier-plugin-organize-imports"]
 }
