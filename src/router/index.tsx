@@ -1,8 +1,10 @@
+import { RouteObject, createBrowserRouter } from 'react-router-dom'
+
 import BlankLayout from '@hn/layouts/BlankLayout'
 import DefaultLayout from '@hn/layouts/DefaultLayout'
 import ExamplePage from '@hn/pages/example'
 import HomePage from '@hn/pages/home'
-import { RouteObject, createBrowserRouter } from 'react-router-dom'
+import ScratchPaintingPage from '@hn/pages/scratch-painting'
 
 export const routes: RouteObject[] = [
   {
@@ -18,6 +20,14 @@ export const routes: RouteObject[] = [
     element: (
       <BlankLayout>
         <ExamplePage />
+      </BlankLayout>
+    )
+  },
+  {
+    path: '/scratch-painting',
+    element: (
+      <BlankLayout>
+        <ScratchPaintingPage />
       </BlankLayout>
     )
   }

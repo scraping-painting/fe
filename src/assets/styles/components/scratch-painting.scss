@@ -1,0 +1,513 @@
+// Scratch Painting Styles
+
+// Variables
+:root {
+  --scratch-primary-color: #007bff;
+  --scratch-secondary-color: #6c757d;
+  --scratch-success-color: #28a745;
+  --scratch-danger-color: #dc3545;
+  --scratch-warning-color: #ffc107;
+  --scratch-info-color: #17a2b8;
+  --scratch-light-color: #f8f9fa;
+  --scratch-dark-color: #343a40;
+
+  --scratch-border-radius: 8px;
+  --scratch-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --scratch-transition: all 0.3s ease;
+}
+
+// Scratch Card Component
+.scratch-card {
+  position: relative;
+  border-radius: var(--scratch-border-radius);
+  box-shadow: var(--scratch-box-shadow);
+  overflow: hidden;
+  background-color: var(--scratch-light-color);
+  transition: var(--scratch-transition);
+
+  &:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  canvas {
+    display: block;
+    transition: var(--scratch-transition);
+
+    &:hover {
+      cursor: grab;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  // Progress indicator
+  &__progress {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    backdrop-filter: blur(4px);
+    animation: fadeInScale 0.3s ease;
+  }
+
+  // Completion overlay
+  &__completion {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(76, 175, 80, 0.95);
+    color: white;
+    padding: 16px 32px;
+    border-radius: var(--scratch-border-radius);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    animation: completionPulse 0.6s ease;
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+  }
+
+  // Reset button
+  &__reset {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: var(--scratch-primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--scratch-transition);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+
+    &:hover {
+      background: #0056b3;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Error state
+  &-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffebee, #ffcdd2);
+    border: 2px dashed var(--scratch-danger-color);
+
+    .error-message {
+      color: var(--scratch-danger-color);
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+    }
+  }
+}
+
+// Scratch Painting Controls
+.scratch-painting-controls {
+  background: white;
+  border-radius: var(--scratch-border-radius);
+  box-shadow: var(--scratch-box-shadow);
+  transition: var(--scratch-transition);
+
+  h3 {
+    color: var(--scratch-dark-color);
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--scratch-primary-color);
+    padding-bottom: 8px;
+  }
+
+  // Control sections
+  &__section {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e9ecef;
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+  }
+
+  // Labels
+  &__label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--scratch-dark-color);
+  }
+
+  // Range inputs
+  input[type='range'] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    outline: none;
+    transition: var(--scratch-transition);
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--scratch-primary-color);
+      cursor: pointer;
+      transition: var(--scratch-transition);
+      box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+
+      &:hover {
+        background: #0056b3;
+        transform: scale(1.1);
+      }
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--scratch-primary-color);
+      cursor: pointer;
+      border: none;
+      transition: var(--scratch-transition);
+
+      &:hover {
+        background: #0056b3;
+        transform: scale(1.1);
+      }
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+  }
+
+  // Color input
+  input[type='color'] {
+    width: 100%;
+    height: 40px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--scratch-transition);
+
+    &:hover {
+      border-color: var(--scratch-primary-color);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--scratch-primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+  }
+
+  // Checkboxes
+  input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    accent-color: var(--scratch-primary-color);
+    cursor: pointer;
+  }
+
+  // Checkbox labels
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: var(--scratch-transition);
+
+    &:hover {
+      color: var(--scratch-primary-color);
+    }
+  }
+
+  // Progress bar
+  &__progress-bar {
+    width: 100%;
+    height: 24px;
+    background: #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 8px;
+
+    &-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--scratch-primary-color), var(--scratch-info-color));
+      border-radius: 12px;
+      transition: width 0.5s ease;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        animation: shimmer 2s infinite;
+      }
+
+      &--complete {
+        background: linear-gradient(90deg, var(--scratch-success-color), #20c997);
+      }
+    }
+  }
+
+  // Reset button
+  &__reset-button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, var(--scratch-danger-color), #e74c3c);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--scratch-transition);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+
+    &:hover {
+      background: linear-gradient(135deg, #c82333, #dc143c);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(220, 53, 69, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Scratch Painting Page
+.scratch-painting-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  padding: 20px;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--scratch-primary-color), var(--scratch-info-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: var(--scratch-secondary-color);
+      margin: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  &__left-panel {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__right-panel {
+    width: 320px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  // Image selector
+  &__image-selector {
+    background: white;
+    border-radius: var(--scratch-border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--scratch-box-shadow);
+
+    h3 {
+      margin: 0 0 15px 0;
+      color: var(--scratch-dark-color);
+      font-size: 16px;
+    }
+
+    &-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 12px;
+    }
+
+    &-thumb {
+      width: 100%;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: var(--scratch-transition);
+
+      &:hover {
+        border-color: rgba(0, 123, 255, 0.5);
+        transform: scale(1.05);
+      }
+
+      &--selected {
+        border-color: var(--scratch-primary-color);
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+      }
+    }
+  }
+
+  // Instructions
+  &__instructions {
+    background: linear-gradient(135deg, #e7f3ff, #dbeafe);
+    border-radius: var(--scratch-border-radius);
+    padding: 20px;
+    border: 1px solid #bfdbfe;
+
+    h4 {
+      margin: 0 0 15px 0;
+      color: #1e40af;
+      font-size: 16px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+
+      li {
+        margin-bottom: 8px;
+        color: #374151;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes completionPulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .scratch-card {
+    max-width: 100%;
+
+    &__completion {
+      font-size: 16px;
+      padding: 12px 24px;
+    }
+  }
+
+  .scratch-painting-controls {
+    position: static !important;
+  }
+
+  :root {
+    --scratch-border-radius: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scratch-painting-page {
+    padding: 10px;
+
+    &__header h1 {
+      font-size: 2rem;
+    }
+
+    &__content {
+      gap: 15px;
+    }
+  }
+
+  .scratch-card {
+    &__progress {
+      top: 5px;
+      right: 5px;
+      padding: 4px 8px;
+      font-size: 11px;
+    }
+
+    &__reset {
+      bottom: 5px;
+      left: 5px;
+      padding: 6px 12px;
+      font-size: 11px;
+    }
+  }
+}
