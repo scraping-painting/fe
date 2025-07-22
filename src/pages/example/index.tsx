@@ -1,6 +1,5 @@
-import { MouseEvent, useCallback } from 'react'
-
 import { useHandleClick } from '@hn/hooks/useHandleClick'
+import { MouseEvent, useCallback } from 'react'
 
 const ExamplePage = () => {
   const handleClick = useCallback((event?: MouseEvent) => {

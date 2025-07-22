@@ -1,6 +1,5 @@
 import i18n, { Resource } from 'i18next'
 import { initReactI18next } from 'react-i18next'
-
 import en from './lang/en.json'
 import vi from './lang/vi.json'
 

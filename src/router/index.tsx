@@ -1,9 +1,8 @@
-import { RouteObject, createBrowserRouter } from 'react-router-dom'
-
 import BlankLayout from '@hn/layouts/BlankLayout'
 import DefaultLayout from '@hn/layouts/DefaultLayout'
 import ExamplePage from '@hn/pages/example'
 import HomePage from '@hn/pages/home'
+import { RouteObject, createBrowserRouter } from 'react-router-dom'
 
 export const routes: RouteObject[] = [
   {

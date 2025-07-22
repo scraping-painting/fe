@@ -1,6 +1,5 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit'
-
 import GenerateUtil from '@hn/utils/generate'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 
 const initialState: Store.IAppState = {
   isLoading: false,

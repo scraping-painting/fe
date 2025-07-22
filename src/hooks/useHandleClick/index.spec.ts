@@ -1,8 +1,6 @@
-import { describe, expect, it, vi } from 'vitest'
-
-import { act, renderHook } from '@testing-library/react'
-
 import { delay } from '@hn/utils/common'
+import { act, renderHook } from '@testing-library/react'
+import { describe, expect, it, vi } from 'vitest'
 
 import { useHandleClick } from '.'
 
