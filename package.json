@@ -1,0 +1,84 @@
+{
+  "name": "react-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "prettier --check \"src/**/*.{ts,tsx}\" && eslint src --ext .ts,.tsx",
+    "fix": "prettier --write \"src/**/*.{ts,tsx}\" && eslint src --ext .ts,.tsx --fix",
+    "test": "vitest",
+    "prepare": "husky install",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "pnpm lint"
+    ]
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "2.2.6",
+    "@tanstack/react-query": "5.51.11",
+    "axios": "1.7.2",
+    "bootstrap": "5.3.3",
+    "classnames": "2.5.1",
+    "i18next": "23.12.2",
+    "react": "18.3.1",
+    "react-bootstrap": "2.10.4",
+    "react-dom": "18.3.1",
+    "react-i18next": "15.0.0",
+    "react-redux": "9.1.2",
+    "react-router-dom": "6.25.1",
+    "redux-persist": "6.0.0",
+    "uuid": "10.0.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.6.1",
+    "@storybook/addon-essentials": "8.2.5",
+    "@storybook/addon-interactions": "8.2.5",
+    "@storybook/addon-links": "8.2.5",
+    "@storybook/addon-onboarding": "8.2.5",
+    "@storybook/blocks": "8.2.5",
+    "@storybook/react": "8.2.5",
+    "@storybook/react-vite": "8.2.5",
+    "@storybook/test": "8.2.5",
+    "@testing-library/dom": "10.3.2",
+    "@testing-library/react": "16.0.0",
+    "@trivago/prettier-plugin-sort-imports": "4.3.0",
+    "@types/node": "20.14.11",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@types/uuid": "10.0.0",
+    "@typescript-eslint/eslint-plugin": "7.16.1",
+    "@typescript-eslint/parser": "7.16.1",
+    "@vitejs/plugin-react": "4.3.1",
+    "eslint": "8.56.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-react": "7.35.0",
+    "eslint-plugin-storybook": "0.8.0",
+    "husky": "9.1.1",
+    "jsdom": "24.1.1",
+    "lint-staged": "15.2.7",
+    "msw": "2.3.4",
+    "msw-storybook-addon": "2.0.3",
+    "prettier": "3.3.3",
+    "prettier-eslint": "16.3.0",
+    "sass": "1.77.8",
+    "storybook": "8.2.5",
+    "typescript": "5.5.3",
+    "vite": "5.3.4",
+    "vitest": "2.0.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
+  },
+  "msw": {
+    "workerDirectory": "public"
+  }
+}

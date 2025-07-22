@@ -1,0 +1,15 @@
+{
+  "singleQuote": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "printWidth": 100,
+  "arrowParens": "avoid",
+  "trailingComma": "none",
+  "semi": false,
+  "endOfLine": "lf",
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": ["^\\w", "^@(?!hn/).*(.*)", "^@hn/(.*)", "^\\.", "^\\./", "^\\.\\./"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderGroupNamespaceSpecifiers": true
+}
